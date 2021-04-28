@@ -90,8 +90,13 @@ async function getDatasource(goModule: string): Promise<DataSource | null> {
 
       // split the goSourceUrl: https://host/go/module -> go/module
       const split = goSourceUrl.split('/');
-      const lookupName = split[3] + '/' + split[4];
-
+      var lookupName: string = '';
+      for (var i: number = 3; i < split.length; i++) {
+        lookupName += split[i];
+        if (i != split.length - 1) {
+          lookupName += '/';
+        }
+      }
 
       const registryUrl = `${parsedUrl.protocol}//${parsedUrl.host}`;
 
